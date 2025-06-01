@@ -12,15 +12,22 @@ enum TokenType{
 
 
 int main() {
-    std:: ifstream file("source.txt");
-    // Read input character by character by looping throught source.txt
+    std::ifstream file("source.txt");
+    if(!file){
+        std::cerr << "Error with opening source.tsxt\n";
+        return -1;
+
+    }
+    // Read input character by character by looping through source.txt
     char c;
     while (file.get(c)){
-        std::cout << c;
+        cout << c << " ";
     }
 
+    file.close();
+
     // Recognise and Extract tokens
-    // Store tokens as Objext 
+    // Store tokens as Object 
 
 
   return 0;
