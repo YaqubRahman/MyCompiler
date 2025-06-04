@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <fstream> // Libary allows us to work with files
 using namespace std;
 
@@ -20,8 +21,40 @@ int main() {
     }
     // Read input character by character by looping through source.txt
     char c;
+    std::vector<TokenType> tokenlist;
     while (file.get(c)){
-        cout << c << " ";
+        TokenType token;
+        switch(c){
+            case '+':
+                token = Plus;
+                tokenlist.push_back(token);
+                break;
+            case '-':
+                token = Minus;
+                tokenlist.push_back(token);
+                break;
+            case '*':
+                token = Star;
+                tokenlist.push_back(token);
+                break;
+            case '/':
+                token = Slash;
+                tokenlist.push_back(token);
+                break;
+            case '(':
+                token = LeftParen;
+                tokenlist.push_back(token);
+                break;
+            case ')':
+                token = RightParen;
+                tokenlist.push_back(token);
+                break;
+            default:
+                token = Error;
+                tokenlist.push_back(token);
+                break;
+        }
+        std::cout << token << " ";
     }
 
     file.close();
