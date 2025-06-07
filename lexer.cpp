@@ -45,11 +45,18 @@ int main() {
     char c;
     std::vector<TokenType> tokenlist;
     while (file.get(c)){
-        TokenType token;
+        TokenType token;  
         if (isdigit(c)){
+            string consecutiveNums = "";
+            consecutiveNums += c;
+
+            while(isdigit(file.peek())){
+                file.get(c);
+                consecutiveNums += c;
+            }
             token = IntLiteral;
             tokenlist.push_back(token);
-            std::cout << tokenToString(token) << " ";
+            std::cout << (consecutiveNums) << " ";
             continue;
         }
         switch(c){
