@@ -12,10 +12,32 @@ enum TokenType{
 };
 
 
+std::string tokenToString(TokenType token) {
+    switch (token) {
+        case Plus: return "Plus";
+        case Minus: return "Minus";
+        case Star: return "Star";
+        case Slash: return "Slash";
+        case LeftParen: return "LeftParen";
+        case RightParen: return "RightParen";
+        case IntLiteral: return "IntLiteral";
+        case StringLiteral: return "StringLiteral";
+        case Identifier: return "Identifier";
+        case If: return "If";
+        case Else: return "Else";
+        case While: return "While";
+        case Return: return "Return";
+        case EndOfFile: return "EndOfFile";
+        case Error: return "Error";
+        default: return "Unknown";
+    }
+}
+
+
 int main() {
     std::ifstream file("source.txt");
     if(!file){
-        std::cerr << "Error with opening source.tsxt\n";
+        std::cerr << "Error with opening source.text\n";
         return -1;
 
     }
@@ -24,6 +46,12 @@ int main() {
     std::vector<TokenType> tokenlist;
     while (file.get(c)){
         TokenType token;
+        if (isdigit(c)){
+            token = IntLiteral;
+            tokenlist.push_back(token);
+            std::cout << tokenToString(token) << " ";
+            continue;
+        }
         switch(c){
             case '+':
                 token = Plus;
@@ -49,12 +77,18 @@ int main() {
                 token = RightParen;
                 tokenlist.push_back(token);
                 break;
+            case ' ':
+                continue;
+            case '\n':
+                continue;
+            case '\t':
+                continue;
             default:
                 token = Error;
                 tokenlist.push_back(token);
                 break;
         }
-        std::cout << token << " ";
+        std::cout << tokenToString(token) << " ";
     }
 
     file.close();
