@@ -57,7 +57,7 @@ int main() {
             }
             token = IntLiteral;
             tokenlist.push_back(token);
-            std::cout << (token) << " ";
+            std::cout << (tokenToString(token)) << " ";
             continue;
         }
         else if (isalpha(c)){
@@ -74,7 +74,7 @@ int main() {
             else if (consecutiveChar == "return") token = Return;
             else token = Identifier;
             tokenlist.push_back(token);
-            std::cout << (token) << " ";
+            std::cout << (tokenToString(token)) << " ";
             continue;
 
         }
