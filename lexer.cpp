@@ -45,7 +45,8 @@ int main() {
     char c;
     std::vector<TokenType> tokenlist;
     while (file.get(c)){
-        TokenType token;  
+        TokenType token;
+        // Check for groups of numbers that will be labelled together
         if (isdigit(c)){
             string consecutiveNums = "";
             consecutiveNums += c;
@@ -56,8 +57,26 @@ int main() {
             }
             token = IntLiteral;
             tokenlist.push_back(token);
-            std::cout << (consecutiveNums) << " ";
+            std::cout << (token) << " ";
             continue;
+        }
+        else if (isalpha(c)){
+            string consecutiveChar = "";
+            consecutiveChar += c;
+
+            while(isalnum(file.peek())){
+                file.get(c);
+                consecutiveChar += c;
+            }
+            if (consecutiveChar == "if") token = If;
+            else if (consecutiveChar == "else") token = Else;
+            else if (consecutiveChar == "while") token = While;
+            else if (consecutiveChar == "return") token = Return;
+            else token = Identifier;
+            tokenlist.push_back(token);
+            std::cout << (token) << " ";
+            continue;
+
         }
         switch(c){
             case '+':
