@@ -43,7 +43,7 @@ int main() {
     }
     // Read input character by character by looping through source.txt
     char c;
-    std::vector<TokenType> tokenlist;
+    extern std::vector<TokenType> tokenlist;
     while (file.get(c)){
         TokenType token;
         // Check for groups of numbers that will be labelled together
@@ -116,6 +116,9 @@ int main() {
         }
         std::cout << tokenToString(token) << " ";
     }
+    TokenType token = EndOfFile;
+    tokenlist.push_back(token);
+
 
     file.close();
 

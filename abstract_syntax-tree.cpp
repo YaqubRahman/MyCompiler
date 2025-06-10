@@ -1,0 +1,4 @@
+class nodeClass{
+    public:
+
+};
