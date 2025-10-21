@@ -52,6 +52,9 @@ int main() {
     // Read input character by character by looping through source.txt
     char c;
     extern std::vector<TokenType> tokenlist;
+    // Check for line and column numbers
+    int line = 1;
+    int column = 1;
     while (file.get(c)){
         TokenType token;
         // Check for groups of numbers that will be labelled together
@@ -82,9 +85,16 @@ int main() {
             else if (consecutiveChar == "return") token = Return;
             else token = Identifier;
             tokenlist.push_back(token);
+            tokenlist.push_back(Token{type: token, value: consecutiveChar, line: line, column: 0});
             std::cout << (tokenToString(token)) << " ";
+            line++;
             continue;
 
+        }
+        else if (c == '\n'){
+            line++;
+            column = 1;
+            continue;
         }
         switch(c){
             case '+':
