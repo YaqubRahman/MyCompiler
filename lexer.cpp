@@ -11,6 +11,14 @@ enum TokenType{
     EndOfFile, Error
 };
 
+// Define a struct to represent a Token
+struct Token {
+    TokenType type;
+    std::string value;
+    int line;
+    int column;   
+};
+
 
 std::string tokenToString(TokenType token) {
     switch (token) {
